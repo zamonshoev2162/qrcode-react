@@ -6,15 +6,15 @@ export const Navigation = () => {
   return (
     <div>
       <button>
-        <Link to="/">Вернуться на главную</Link>
+        <Link to="/">Back to Home</Link>
       </button>
       {location.pathname === '/generate' ? (
         <button>
-          <Link to="/scan">Сканировать</Link>
+          <Link to="/scan">Scan</Link>
         </button>
       ) : (
         <button>
-          <Link to="/generate">Сгенерировать</Link>
+          <Link to="/generate">Generate</Link>
         </button>
       )}
     </div>
