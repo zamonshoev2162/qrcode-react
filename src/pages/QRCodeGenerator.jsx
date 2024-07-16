@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
+import { Navigation } from '../components/Navigation';
 
 export const QRCodeGenerator = () => {
   const [value, setValue] = useState('');
@@ -19,6 +20,7 @@ export const QRCodeGenerator = () => {
 
   return (
     <div>
+      <Navigation />
       <div>
         <QRCodeSVG value={value} bgColor={colors.bg} fgColor={colors.fg} />
       </div>

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Scanner } from '@yudiel/react-qr-scanner';
+import { Navigation } from '../components/Navigation';
 
 export const QRCodeScanner = () => {
   const [scanned, setScanned] = useState('');
@@ -23,6 +24,7 @@ export const QRCodeScanner = () => {
 
   return (
     <div>
+      <Navigation />
       <div>
         <Scanner
           components={{ audio: false, finder: false }}
