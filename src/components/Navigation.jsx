@@ -4,7 +4,7 @@ export const Navigation = () => {
   const location = useLocation();
 
   return (
-    <nav className="flex gap-6 p-6">
+    <nav className="container flex gap-6 p-6 m-auto">
       <Link className="button" to="/">
         Back to Home
       </Link>

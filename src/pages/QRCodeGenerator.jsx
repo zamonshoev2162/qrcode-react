@@ -6,7 +6,7 @@ export const QRCodeGenerator = () => {
   const [value, setValue] = useState('');
   const [colors, setColors] = useState({
     bg: '#ffffff',
-    fg: '#000000',
+    qr: '#000000',
   });
 
   function onChangeHandler(e) {
@@ -21,33 +21,59 @@ export const QRCodeGenerator = () => {
   return (
     <div>
       <Navigation />
-      <div>
-        <QRCodeSVG value={value} bgColor={colors.bg} fgColor={colors.fg} />
-      </div>
-      <input
-        type="text"
-        placeholder="Enter text or link..."
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-      />
-      <div>
-        <label htmlFor="bg">Background Color</label>
-        <input
-          type="color"
-          id="bg"
-          value={colors.bg}
-          onChange={onChangeHandler}
-        />
-      </div>
-      <div>
-        <label htmlFor="fg">Foreground Color</label>
-        <input
-          type="color"
-          id="fg"
-          value={colors.fg}
-          onChange={onChangeHandler}
-        />
-      </div>
+      <main className="container m-auto flex flex-col items-center gap-4 p-5 md:flex-row md:justify-between">
+        <div className="flex w-full flex-col gap-4 md:w-fit">
+          <textarea
+            className="max-h-96 min-h-48 w-full rounded-lg border-2 border-inherit bg-transparent p-2 outline-none focus:border-orange-500 lg:w-[486px]"
+            placeholder="Enter text or link... (Max. length 715 characters)"
+            maxLength="700"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+          ></textarea>
+          <div className="flex w-full gap-4 text-[12px] md:justify-center lg:text-base">
+            <label
+              className="button flex w-6/12 items-center md:w-fit"
+              style={{ backgroundColor: colors.bg }}
+            >
+              <span className="flex-shrink-0 mix-blend-difference">
+                Background Color
+              </span>
+              <input
+                className="w-full flex-grow opacity-0"
+                type="color"
+                id="bg"
+                value={colors.bg}
+                onChange={onChangeHandler}
+              />
+            </label>
+            <label
+              className="button flex w-6/12 items-center md:w-fit"
+              style={{ backgroundColor: colors.qr }}
+            >
+              <span className="flex-shrink-0 mix-blend-difference">
+                QR Code Color
+              </span>
+              <input
+                className="w-full flex-grow opacity-0"
+                type="color"
+                id="qr"
+                value={colors.qr}
+                onChange={onChangeHandler}
+              />
+            </label>
+          </div>
+        </div>
+        <div className="scale-75 md:scale-100">
+          <QRCodeSVG
+            className="rounded-lg"
+            value={value}
+            bgColor={colors.bg}
+            fgColor={colors.qr}
+            size={384}
+            includeMargin={true}
+          />
+        </div>
+      </main>
     </div>
   );
 };
