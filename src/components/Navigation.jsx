@@ -4,19 +4,19 @@ export const Navigation = () => {
   const location = useLocation();
 
   return (
-    <div>
-      <button>
-        <Link to="/">Back to Home</Link>
-      </button>
+    <nav className="flex gap-6 p-6">
+      <Link className="button" to="/">
+        Back to Home
+      </Link>
       {location.pathname === '/generate' ? (
-        <button>
-          <Link to="/scan">Scan</Link>
-        </button>
+        <Link className="button" to="/scan">
+          Scan
+        </Link>
       ) : (
-        <button>
-          <Link to="/generate">Generate</Link>
-        </button>
+        <Link className="button" to="/generate">
+          Generate
+        </Link>
       )}
-    </div>
+    </nav>
   );
 };
