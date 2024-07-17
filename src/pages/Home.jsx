@@ -2,20 +2,20 @@ import { Link } from 'react-router-dom';
 
 export const Home = () => {
   return (
-    <div>
-      <main>
-        <h1>
-          Create and scan <span>QR codes</span> for free
-        </h1>
-        <div>
-          <button>
-            <Link to="/generate">Generate</Link>
-          </button>
-          <button>
-            <Link to="/scan">Scan</Link>
-          </button>
-        </div>
-      </main>
-    </div>
+    <main className="flex min-h-[100vh] flex-col items-center justify-center gap-6">
+      <h1 className="text-center text-4xl font-bold sm:text-7xl">
+        Create and scan <br />
+        <span className="text-orange-500"> QR codes </span>
+        for free.
+      </h1>
+      <div className="flex gap-4 sm:text-2xl">
+        <Link className="button" to="/generate">
+          Generate
+        </Link>
+        <Link className="button" to="/scan">
+          Scan
+        </Link>
+      </div>
+    </main>
   );
 };
