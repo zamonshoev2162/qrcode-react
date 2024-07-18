@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
+import { toPng, toJpeg } from 'html-to-image';
+import download from 'downloadjs';
 import { Navigation } from '../components/Navigation';
 
 export const QRCodeGenerator = () => {
@@ -8,6 +10,7 @@ export const QRCodeGenerator = () => {
     bg: '#ffffff',
     qr: '#000000',
   });
+  const qrRef = useRef(null);
 
   function onChangeHandler(e) {
     const { id, value } = e.target;
@@ -15,6 +18,34 @@ export const QRCodeGenerator = () => {
       setColors((prevColors) => ({ ...prevColors, [id]: value }));
     } else {
       e.target.value = colors[id];
+    }
+  }
+
+  function downloadQRCode(format) {
+    if (!qrRef.current) return;
+
+    const downloadBlob = (dataUrl, fileName) => {
+      download(dataUrl, fileName);
+    };
+
+    switch (format) {
+      case 'svg':
+        const svgData = new XMLSerializer().serializeToString(qrRef.current);
+        const svgBlob = new Blob([svgData], {
+          type: 'image/svg+xml;charset=utf-8',
+        });
+        download(svgBlob, 'qrcode.svg');
+        break;
+      case 'png':
+        toPng(qrRef.current).then((dataUrl) =>
+          downloadBlob(dataUrl, 'qrcode.png'),
+        );
+        break;
+      case 'jpg':
+        toJpeg(qrRef.current, { quality: 0.95 }).then((dataUrl) =>
+          downloadBlob(dataUrl, 'qrcode.jpg'),
+        );
+        break;
     }
   }
 
@@ -63,15 +94,28 @@ export const QRCodeGenerator = () => {
             </label>
           </div>
         </div>
-        <div className="scale-75 md:scale-100">
-          <QRCodeSVG
-            className="rounded-lg"
-            value={value}
-            bgColor={colors.bg}
-            fgColor={colors.qr}
-            size={384}
-            includeMargin={true}
-          />
+        <div className="flex scale-75 flex-col items-center gap-4 md:scale-100">
+          <div ref={qrRef}>
+            <QRCodeSVG
+              className="rounded-lg"
+              value={value}
+              bgColor={colors.bg}
+              fgColor={colors.qr}
+              size={384}
+              includeMargin={true}
+            />
+          </div>
+          <div className="flex gap-2">
+            <button className="button" onClick={() => downloadQRCode('svg')}>
+              Download SVG
+            </button>
+            <button className="button" onClick={() => downloadQRCode('png')}>
+              Download PNG
+            </button>
+            <button className="button" onClick={() => downloadQRCode('jpg')}>
+              Download JPG
+            </button>
+          </div>
         </div>
       </main>
     </div>

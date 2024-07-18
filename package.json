@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@yudiel/react-qr-scanner": "^2.0.4",
+    "downloadjs": "^1.4.7",
+    "html-to-image": "^1.11.11",
     "qr-scanner": "^1.4.2",
     "qrcode.react": "^3.1.0",
     "react": "^18.3.1",

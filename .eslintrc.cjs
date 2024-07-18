@@ -21,5 +21,6 @@ module.exports = {
     'prettier/prettier': 'warn',
     'prefer-const': 'warn',
     'no-console': 'warn',
+    'no-case-declarations': 'off',
   },
 };
