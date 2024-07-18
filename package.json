@@ -10,7 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@yudiel/react-qr-scanner": "^2.0.4",
     "downloadjs": "^1.4.7",
     "html-to-image": "^1.11.11",
     "qr-scanner": "^1.4.2",
